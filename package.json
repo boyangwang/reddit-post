@@ -1,0 +1,26 @@
+{
+  "name": "reddit-post",
+  "version": "1.0.0",
+  "description": "",
+  "main": "crawl_and_post.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boyangwang/reddit-post.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boyangwang/reddit-post/issues"
+  },
+  "homepage": "https://github.com/boyangwang/reddit-post#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "jquery": "^3.2.1",
+    "jsdom": "^11.2.0",
+    "request-promise": "^4.2.1"
+  }
+}

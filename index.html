@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>抓取S1帖子</title>
+</head>
+<body>
+    <input id="url_input" type="text"></input><button onclick="get_thread()">抓取帖子</button>
+    <script>
+        function get_thread() {
+            var url = document.querySelector('#url_input').value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function(res) {
+                if (!res || !res.target || !res.target.response)
+                    return alert('Err: empty response');
+                if (res.target.response.err)
+                    return alert('Err: ' + res.target.response.err);
+                print_thread(JSON.parse(res.target.response));
+            };
+            xmlhttp.open("POST", "/get_thread", true);
+            xmlhttp.setRequestHeader('Content-type', 'application/json');
+            xmlhttp.send(JSON.stringify({url: url}));
+        }
+        function print_thread(thread) {
+            var thread_textarea = document.querySelector('#thread_textarea');
+            var printed_thread = '';
+            printed_thread += '[镜像]' + thread.title + '\n\n' + '## 楼主：' + thread.author + '\n\n';
+            printed_thread += thread.content + '\n\n*****\n';
+            thread.replies.forEach(reply => printed_thread += reply.author + ': ' + reply.content + '\n\n*****\n');
+            thread_textarea.value = printed_thread;
+        }
+    </script>
+    <br><textarea id="thread_textarea" style="margin-top: 20px;width: 600px; min-height: 500px;"></textarea>
+</body>
+</html>
