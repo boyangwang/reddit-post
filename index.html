@@ -25,7 +25,11 @@
             var printed_thread = '';
             printed_thread += '[镜像]' + thread.title + '\n\n' + '## 楼主：' + thread.author + '\n\n';
             printed_thread += thread.content.replace(/\n/g, '  \n') + '\n\n*****\n';
-            thread.replies.forEach(reply => printed_thread += reply.author + ': ' + reply.content.replace(/\n/g, '  \n') + '\n\n*****\n');
+            thread.replies.forEach(reply => {
+		if (!reply.content) return;
+		printed_thread += reply.author + ': ' +
+		    reply.content.replace(/\n/g, '  \n') + '\n\n*****\n';
+	    });
             thread_textarea.value = printed_thread;
         }
     </script>
