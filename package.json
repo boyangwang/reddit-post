@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "crawl_and_post.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/boyangwang/reddit-post.git"
@@ -17,10 +15,11 @@
   },
   "homepage": "https://github.com/boyangwang/reddit-post#readme",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "express": "^4.15.4",
-    "jquery": "^3.2.1",
-    "jsdom": "^11.2.0",
-    "request-promise": "^4.2.1"
+    "jsdom": "^16.2.2",
+    "node-fetch": "^2.6.0",
+    "reddit": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^13.13.5"
   }
 }
