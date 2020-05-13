@@ -60,7 +60,7 @@ var FOUR_HOURS = 4 * 60 * 60 * 1000;
 var COMMENTS_PER_PAGE = 30;
 var REDDIT_BASE_URL = 'https://www.reddit.com';
 var USER_AGENT = 's1-mirror/1.0';
-var CRAWL_THREAD_LIMIT = 1;
+var CRAWL_THREAD_LIMIT = 12;
 var CRAWL_PAGE_LIMIT = 100;
 var reddit = new Reddit({
     username: config.user,
@@ -302,25 +302,14 @@ function doCrawl(totalThreads) {
         });
     });
 }
-function scheduler(totalThreads) {
-    setInterval(function () {
-        doCrawl(totalThreads);
-    }, FOUR_HOURS);
-}
 function main() {
     return __awaiter(this, void 0, void 0, function () {
-        var tobj;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    tobj = readThreadsObj();
-                    // scheduler(tobj.threads);
-                    return [4 /*yield*/, doCrawl(tobj.threads)];
-                case 1:
-                    // scheduler(tobj.threads);
-                    _a.sent();
-                    return [2 /*return*/];
-            }
+            setInterval(function () {
+                var tobj = readThreadsObj();
+                doCrawl(tobj.threads);
+            }, FOUR_HOURS);
+            return [2 /*return*/];
         });
     });
 }

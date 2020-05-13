@@ -23,7 +23,7 @@ const FOUR_HOURS = 4 * 60 * 60 * 1000;
 const COMMENTS_PER_PAGE = 30;
 const REDDIT_BASE_URL = 'https://www.reddit.com';
 const USER_AGENT = 's1-mirror/1.0';
-const CRAWL_THREAD_LIMIT = 1;
+const CRAWL_THREAD_LIMIT = 12;
 const CRAWL_PAGE_LIMIT = 100;
 
 const reddit = new Reddit({
@@ -240,16 +240,12 @@ async function doCrawl(totalThreads: Thread[]) {
   writeThreadsObj({ threads: totalThreads });
 }
 
-function scheduler(totalThreads: Thread[]) {
-  setInterval(() => {
-    doCrawl(totalThreads);
-  }, FOUR_HOURS);
-}
-
 async function main() {
-  let tobj = readThreadsObj();
-  // scheduler(tobj.threads);
-  await doCrawl(tobj.threads);
+  setInterval(() => {
+    let tobj = readThreadsObj();
+    doCrawl(tobj.threads)
+  }, FOUR_HOURS);
+  // await doCrawl(tobj.threads);
 }
 
 async function test() {
