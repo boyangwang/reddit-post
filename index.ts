@@ -19,12 +19,12 @@ const JSDOM = require("jsdom").JSDOM;
 const fetch = require('node-fetch');
 const config = require('./config.json');
 
-const FOUR_HOURS = 4 * 60 * 60 * 1000;
+const THIRTY_MINS = 20 * 60 * 1000;
 const COMMENTS_PER_PAGE = 30;
 const REDDIT_BASE_URL = 'https://www.reddit.com';
 const USER_AGENT = 's1-mirror/1.0';
-const CRAWL_THREAD_LIMIT = 12;
-const CRAWL_PAGE_LIMIT = 100;
+const CRAWL_THREAD_LIMIT = 1;
+const CRAWL_PAGE_LIMIT = 12;
 
 const reddit = new Reddit({
   username: config.user,
@@ -53,6 +53,7 @@ interface ThreadsObj {
 }
 
 function readThreadsObj() {
+  delete require.cache[require.resolve('./threads.json')];
   const threadsObj: ThreadsObj = require('./threads.json');
   return threadsObj;
 }
@@ -151,8 +152,9 @@ async function postReddit(t: Thread | null) {
   let postResult = await reddit.post('/api/submit', {
     sr: 'saraba1st',
     kind: 'self',
-    title: `[镜像] ${t.title}`,
-    text: toRedditPostText(t)
+    title: `${t.title}`,
+    text: toRedditPostText(t),
+    flair_id: "353168d4-958a-11ea-981b-0e446e54eac1"
   });
   return postResult;
 }
@@ -244,7 +246,7 @@ async function main() {
   setInterval(() => {
     let tobj = readThreadsObj();
     doCrawl(tobj.threads)
-  }, FOUR_HOURS);
+  }, THIRTY_MINS);
   // await doCrawl(tobj.threads);
 }
 

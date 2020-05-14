@@ -56,12 +56,12 @@ var Reddit = require("reddit");
 var JSDOM = require("jsdom").JSDOM;
 var fetch = require('node-fetch');
 var config = require('./config.json');
-var FOUR_HOURS = 4 * 60 * 60 * 1000;
+var THIRTY_MINS = 20 * 60 * 1000;
 var COMMENTS_PER_PAGE = 30;
 var REDDIT_BASE_URL = 'https://www.reddit.com';
 var USER_AGENT = 's1-mirror/1.0';
-var CRAWL_THREAD_LIMIT = 12;
-var CRAWL_PAGE_LIMIT = 100;
+var CRAWL_THREAD_LIMIT = 1;
+var CRAWL_PAGE_LIMIT = 12;
 var reddit = new Reddit({
     username: config.user,
     password: config.password,
@@ -88,6 +88,7 @@ var Comment = /** @class */ (function () {
     return Comment;
 }());
 function readThreadsObj() {
+    delete require.cache[require.resolve('./threads.json')];
     var threadsObj = require('./threads.json');
     return threadsObj;
 }
@@ -174,8 +175,9 @@ function postReddit(t) {
                     return [4 /*yield*/, reddit.post('/api/submit', {
                             sr: 'saraba1st',
                             kind: 'self',
-                            title: "[\u955C\u50CF] " + t.title,
-                            text: toRedditPostText(t)
+                            title: "" + t.title,
+                            text: toRedditPostText(t),
+                            flair_id: "353168d4-958a-11ea-981b-0e446e54eac1"
                         })];
                 case 1:
                     postResult = _a.sent();
@@ -308,7 +310,7 @@ function main() {
             setInterval(function () {
                 var tobj = readThreadsObj();
                 doCrawl(tobj.threads);
-            }, FOUR_HOURS);
+            }, THIRTY_MINS);
             return [2 /*return*/];
         });
     });
