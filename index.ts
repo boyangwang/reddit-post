@@ -72,18 +72,19 @@ async function getCurPageBasics(pageNum: number) {
       "pragma": "no-cache",
       "sec-fetch-dest": "document",
       "sec-fetch-mode": "navigate",
-      "sec-fetch-site": "none",
+      "sec-fetch-site": "same-origin",
       "sec-fetch-user": "?1",
       "upgrade-insecure-requests": "1",
-      "cookie": "_uab_collina=158722857536539424028746; B7Y9_2132_saltkey=Bgj74QxT; B7Y9_2132_lastvisit=1587224972; __cfduid=dd7840ef549437fea20a4fd412ec635f01587228572; __gads=ID=f3d23201db16a343:T=1587228575:S=ALNI_MbLAKtDMpcbCOiPStwQxYF1MG3-_g; UM_distinctid=1718e3207bd99f-0b4815d632de04-396a7f07-1aeaa0-1718e3207bea62; _ga=GA1.2.548514943.1587228575; B7Y9_2132_auth=c0b68Y36ObPo7gXs5h8Ud52OLIoNUdOk0%2Be6oXu1M71XQQnXZ4IPypz71kJjvPakpK2NblPBiYQ%2Bp67ylbsBgC6J8ns; B7Y9_2132_lastcheckfeed=184145%7C1587228590; B7Y9_2132_nofavfid=1; B7Y9_2132_smile=1465D1; B7Y9_2132_visitedfid=75D4; B7Y9_2132_st_t=184145%7C1589182875%7Cc0bdc3a0c1f730a9d45378021279aa52; B7Y9_2132_forum_lastvisit=D_75_1589182875; B7Y9_2132_st_p=184145%7C1589183631%7C605da842a81c65ceb2aa63a03cc00491; B7Y9_2132_viewid=tid_1933997; CNZZDATA1260281688=1531919761-1587223605-%7C1589183532; B7Y9_2132_sid=ycrQi9; B7Y9_2132_lip=223.71.220.14%2C1589182819; B7Y9_2132_yfe_in=1; B7Y9_2132_pc_size_c=0; B7Y9_2132_myrepeat_rr=R0; B7Y9_2132_ulastactivity=401bfeDgtH%2Fhn6AAKcPEyZ9c2kUfe7pgAXenrw4gvMNISoSlZyNb; B7Y9_2132_sendmail=1; B7Y9_2132_lastact=1589295098%09home.php%09spacecp; B7Y9_2132_checkpm=1"
+      "cookie": "_uab_collina=158722857536539424028746; __gads=ID=f3d23201db16a343:T=1587228575:S=ALNI_MbLAKtDMpcbCOiPStwQxYF1MG3-_g; UM_distinctid=1718e3207bd99f-0b4815d632de04-396a7f07-1aeaa0-1718e3207bea62; _ga=GA1.2.548514943.1587228575; B7Y9_2132_nofavfid=1; B7Y9_2132_smile=1465D1; B7Y9_2132_visitedfid=75D4; B7Y9_2132_st_t=184145%7C1589295126%7C9d3b4eee2ad26ce1021d4ca92c2f0e9e; B7Y9_2132_forum_lastvisit=D_75_1589295126; B7Y9_2132_viewid=tid_250856; B7Y9_2132_st_p=184145%7C1589298903%7Cdf305ef5e5c9958ef970da6e9b860d42; B7Y9_2132_saltkey=Q9N98w7R; B7Y9_2132_lastvisit=1589882620; B7Y9_2132_sid=a2uxo7; B7Y9_2132_pc_size_c=0; __cfduid=d2b0990d43307754f81cda5b33bb1fc7d1589886220; B7Y9_2132_sendmail=1; CNZZDATA1260281688=1531919761-1587223605-%7C1589883300; _gid=GA1.2.128581470.1589886224; _gat_gtag_UA_141266582_1=1; B7Y9_2132_ulastactivity=8351jEOeYwFA6lnVBn8wuqJEA8jv2h%2Br315f6QdYIOXd09RKfEu1; B7Y9_2132_auth=6d16BlzBsNRH3yrqOyoV6NsI0JVEvKMcuDrqsd0Sm22SolPOIXqFq7QpoFoNzLZwYr8uQ%2BstohfSEi3ujPoFO0v0gOY; B7Y9_2132_lastcheckfeed=230574%7C1589886232; B7Y9_2132_checkfollow=1; B7Y9_2132_lip=223.71.220.14%2C1589886232; B7Y9_2132_yfe_in=1; B7Y9_2132_onlineusernum=38645; B7Y9_2132_myrepeat_rr=R0; B7Y9_2132_lastact=1589886233%09home.php%09spacecp; B7Y9_2132_checkpm=1"
     },
+    "referrer": "https://bbs.saraba1st.com/2b/forum.php",
     "referrerPolicy": "no-referrer-when-downgrade",
     "body": null,
     "method": "GET",
     "mode": "cors"
   });
   let forumText = await forumPage.text();
-  console.log('[getCurPageIds] forumPage', forumPage, forumText);
+  // console.log('[getCurPageIds] forumPage', forumPage, forumText);
   let dom = new JSDOM(forumText);
   let document = dom.window.document;
   let forumThreads = Array.from(document.querySelectorAll('[id^=normalthread_]'))
@@ -172,7 +173,7 @@ async function crawl_thread(t: Thread) {
       "sec-fetch-site": "same-origin",
       "sec-fetch-user": "?1",
       "upgrade-insecure-requests": "1",
-      "cookie": "_uab_collina=158722857536539424028746; B7Y9_2132_saltkey=Bgj74QxT; B7Y9_2132_lastvisit=1587224972; __cfduid=dd7840ef549437fea20a4fd412ec635f01587228572; __gads=ID=f3d23201db16a343:T=1587228575:S=ALNI_MbLAKtDMpcbCOiPStwQxYF1MG3-_g; UM_distinctid=1718e3207bd99f-0b4815d632de04-396a7f07-1aeaa0-1718e3207bea62; _ga=GA1.2.548514943.1587228575; B7Y9_2132_auth=c0b68Y36ObPo7gXs5h8Ud52OLIoNUdOk0%2Be6oXu1M71XQQnXZ4IPypz71kJjvPakpK2NblPBiYQ%2Bp67ylbsBgC6J8ns; B7Y9_2132_lastcheckfeed=184145%7C1587228590; B7Y9_2132_nofavfid=1; B7Y9_2132_smile=1465D1; B7Y9_2132_visitedfid=75D4; B7Y9_2132_sid=ycrQi9; B7Y9_2132_lip=223.71.220.14%2C1589182819; B7Y9_2132_yfe_in=1; B7Y9_2132_pc_size_c=0; B7Y9_2132_myrepeat_rr=R0; B7Y9_2132_st_t=184145%7C1589295126%7C9d3b4eee2ad26ce1021d4ca92c2f0e9e; B7Y9_2132_forum_lastvisit=D_75_1589295126; _gid=GA1.2.2051171630.1589295133; B7Y9_2132_st_p=184145%7C1589298778%7Ce25567fa4a3ff6eb85c620440dbc15f3; B7Y9_2132_viewid=tid_250856; B7Y9_2132_ulastactivity=3019cB0%2FU71WC5ei3DRiuUsT4tfd42WNEBSWCkhSpiz7BN9XBvmr; B7Y9_2132_sendmail=1; B7Y9_2132_lastact=1589298779%09home.php%09spacecp; CNZZDATA1260281688=1531919761-1587223605-%7C1589297329; B7Y9_2132_noticeTitle=1"
+      "cookie": "_uab_collina=158722857536539424028746; __gads=ID=f3d23201db16a343:T=1587228575:S=ALNI_MbLAKtDMpcbCOiPStwQxYF1MG3-_g; UM_distinctid=1718e3207bd99f-0b4815d632de04-396a7f07-1aeaa0-1718e3207bea62; _ga=GA1.2.548514943.1587228575; B7Y9_2132_nofavfid=1; B7Y9_2132_smile=1465D1; B7Y9_2132_visitedfid=75D4; B7Y9_2132_st_t=184145%7C1589295126%7C9d3b4eee2ad26ce1021d4ca92c2f0e9e; B7Y9_2132_forum_lastvisit=D_75_1589295126; B7Y9_2132_viewid=tid_250856; B7Y9_2132_st_p=184145%7C1589298903%7Cdf305ef5e5c9958ef970da6e9b860d42; B7Y9_2132_saltkey=Q9N98w7R; B7Y9_2132_lastvisit=1589882620; B7Y9_2132_sid=a2uxo7; B7Y9_2132_pc_size_c=0; __cfduid=d2b0990d43307754f81cda5b33bb1fc7d1589886220; B7Y9_2132_sendmail=1; CNZZDATA1260281688=1531919761-1587223605-%7C1589883300; _gid=GA1.2.128581470.1589886224; _gat_gtag_UA_141266582_1=1; B7Y9_2132_ulastactivity=8351jEOeYwFA6lnVBn8wuqJEA8jv2h%2Br315f6QdYIOXd09RKfEu1; B7Y9_2132_auth=6d16BlzBsNRH3yrqOyoV6NsI0JVEvKMcuDrqsd0Sm22SolPOIXqFq7QpoFoNzLZwYr8uQ%2BstohfSEi3ujPoFO0v0gOY; B7Y9_2132_lastcheckfeed=230574%7C1589886232; B7Y9_2132_checkfollow=1; B7Y9_2132_lip=223.71.220.14%2C1589886232; B7Y9_2132_yfe_in=1; B7Y9_2132_onlineusernum=38645; B7Y9_2132_myrepeat_rr=R0; B7Y9_2132_lastact=1589886233%09home.php%09spacecp; B7Y9_2132_checkpm=1"
     },
     "referrer": "https://bbs.saraba1st.com/2b/forum-75-1.html",
     "referrerPolicy": "no-referrer-when-downgrade",
@@ -181,7 +182,7 @@ async function crawl_thread(t: Thread) {
     "mode": "cors"
   });
   let threadText = await threadPage.text();
-  console.log('[crawl_thread] threadPage', threadPage, threadText);
+  // console.log('[crawl_thread] threadPage', threadPage, threadText);
   let dom = new JSDOM(threadText);
   let document = dom.window.document;
   let texts = Array.from(document.querySelectorAll('.plhin .plc .pcb'))
@@ -226,11 +227,13 @@ async function doCrawl(totalThreads: Thread[]) {
       if (!t) {
         continue;
       }
+      if (process.platform !== "darwin") {
+        const postResults = await postReddit(t);
+        console.log("[scheduler] post reddit", postResults);
+      } else {
+        console.log("[scheduler][dryrun] post reddit", t);
+      }
       curThreads.push(t);
-      console.log("[scheduler] about to post t", t);
-      const postResults = await postReddit(t);
-      console.log("[scheduler] post reddit", postResults);
-
       if (curThreads.length >= CRAWL_THREAD_LIMIT) {
         break outerLoop;
       }
@@ -238,16 +241,20 @@ async function doCrawl(totalThreads: Thread[]) {
     pageNum++;
   }
   console.log('[scheduler] curLength, totalLength', curThreads.length, totalThreads.length);
-  totalThreads = totalThreads.concat(curThreads);
+  totalThreads = totalThreads.concat(curThreads.map(t => { return { id: t.id } as Thread; }));
   writeThreadsObj({ threads: totalThreads });
 }
 
 async function main() {
-  setInterval(() => {
+  if (process.platform === 'darwin') {
     let tobj = readThreadsObj();
-    doCrawl(tobj.threads)
-  }, THIRTY_MINS);
-  // await doCrawl(tobj.threads);
+    await doCrawl(tobj.threads);
+  } else {
+    setInterval(() => {
+      let tobj = readThreadsObj();
+      doCrawl(tobj.threads)
+    }, THIRTY_MINS);
+  }
 }
 
 async function test() {
